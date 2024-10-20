@@ -1,9 +1,5 @@
-const { Telegraf, Markup } = require('telegraf')
-const { message } = require('telegraf/filters')
 
 require('dotenv').config()
-
-const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const { Sequelize, DataTypes } = require('sequelize');
 
@@ -18,39 +14,51 @@ const sequelize = new Sequelize(
   },
 );
 
-async function testDB() {
+async function runDB() {
   try {
-      await sequelize.authenticate();
-      console.log('Подключение к базе данных успешно установлено.');
-
-      await sequelize.sync({ force: true });
-      console.log("Все модели синхронизированы.");
+    await sequelize.authenticate();
+    console.log('Database available');
   } catch (error) {
-      console.error('Ошибка подключения к базе данных:', error);
-  } finally {
-      await sequelize.close();
-      console.log('Подключение закрыто.');
+    console.error('Database error: ', error);
   }
 }
 
-testDB();
+async function stopDB() {
+  await sequelize.close();
+  console.log('Database down');
+}
 
-
-bot.start((ctx) => ctx.reply('Привет, это Таппер!'))
-bot.help((ctx) => ctx.reply('Покажи свой любимый стикер :)'))
-bot.on(message('sticker'), (ctx) => ctx.reply('👍'))
-bot.hears('Привет', (ctx) => ctx.reply(
-  'Привет! :)',
-  Markup.keyboard([
-    Markup.button.webApp(
-      'Старт!',
-      process.env.WEB_APP_URL,
-    )
-  ])
-))
-
-bot.launch()
+runDB()
 
 // Enable graceful stop
-process.once('SIGINT', () => bot.stop('SIGINT'))
-process.once('SIGTERM', () => bot.stop('SIGTERM'))
+process.once('SIGINT', () => stopDB())
+process.once('SIGTERM', () => stopDB())
+
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// Middleware для работы с JSON
+app.use(express.json());
+
+// Маршрут для проверки API
+app.get('/', (req, res) => {
+  res.send('Succeeded API test');
+});
+
+const userRoutes = require('./routes/users')
+
+app.use('/users', userRoutes)
+
+const server = app.listen(PORT, () => {
+  console.log(`Server working on http://localhost:${PORT}`);
+});
+
+process.once('SIGINT', () => {
+  console.log('Server stoping...')
+  server.close(() => console.log('Server down'))
+})
+process.once('SIGTERM', () => {
+  console.log('Server stoping...')
+  server.close(() => console.log('Server down'))
+})

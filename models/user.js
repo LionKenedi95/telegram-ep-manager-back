@@ -7,6 +7,7 @@ const User = sequelize.define('User', {
     allowNull: false,
     unique: true,
     autoIncrement: true,
+    primaryKey: true,
   },
   telegramID: {
     type: DataTypes.BIGINT,
@@ -29,7 +30,8 @@ const User = sequelize.define('User', {
     allowNull: true,
   },
 }, {
-  timestamps: true
+  timestamps: true,
+  tableName: 'users',
 });
 
 module.exports = User;

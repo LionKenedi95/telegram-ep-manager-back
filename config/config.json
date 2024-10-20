@@ -1,0 +1,9 @@
+{
+  "development": {
+    "username": "root",
+    "password": "LionMysql6315!",
+    "database": "db_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
