@@ -1,6 +1,7 @@
 
 require('dotenv').config()
-
+const cors = require('cors');
+const express = require('express');
 const { Sequelize, DataTypes } = require('sequelize');
 
 // Создаем подключение к базе данных
@@ -34,12 +35,15 @@ runDB()
 process.once('SIGINT', () => stopDB())
 process.once('SIGTERM', () => stopDB())
 
-const express = require('express');
 const app = express();
 const PORT = 3000;
 
 // Middleware для работы с JSON
 app.use(express.json());
+
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  app.use(cors())
+}
 
 // Маршрут для проверки API
 app.get('/', (req, res) => {

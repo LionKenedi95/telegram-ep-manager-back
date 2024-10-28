@@ -1,17 +1,40 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
+const { User, TimeSlot } = require('../models');
 
 // Получение всех пользователей
-router.get('/', async (req, res) => {
-  const users = await User.findAll();
-  res.json(users);
+router.get('/:id', async (req, res) => {
+  const id = parseInt(req.params.id)
+  console.log('GET user with id', id)
+  const user = await User.findByPk(id, {
+    include: [
+      {
+        model: TimeSlot,
+        as: 'timeSlots'
+      }
+    ]
+  });
+  res.json(user);
 });
 
-// Создание нового пользователя
-router.post('/', async (req, res) => {
-  const { name, email } = req.body;
-  const user = await User.create({ name, email });
+router.post('/create', async (req, res) => {
+  console.log('req.body', req.body)
+  const {
+    telegramID,
+    language,
+    username,
+    firstName,
+    lastName,
+  } = req.body.params;
+
+  const user = await User.create({
+    telegramID,
+    language,
+    username,
+    firstName,
+    lastName,
+  });
+
   res.json(user);
 });
 

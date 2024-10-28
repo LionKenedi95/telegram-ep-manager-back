@@ -31,7 +31,6 @@ module.exports = {
         allowNull: true,
       },
     }, {
-      timestamps: true,
       tableName: 'users',
     });
   },
