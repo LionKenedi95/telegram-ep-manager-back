@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { User, TimeSlot } = require('../models');
+const { where } = require('sequelize');
 
-// Получение всех пользователей
+// Получение одного пользователя
 router.get('/:id', async (req, res) => {
   const id = parseInt(req.params.id)
   console.log('GET user with id', id)
@@ -25,7 +26,7 @@ router.post('/create', async (req, res) => {
     username,
     firstName,
     lastName,
-  } = req.body.params;
+  } = req.body;
 
   const user = await User.create({
     telegramID,
@@ -37,5 +38,36 @@ router.post('/create', async (req, res) => {
 
   res.json(user);
 });
+
+router.post('/check', async (req, res) => {
+  const {
+    telegramID,
+    language,
+    username,
+    firstName,
+    lastName,
+  } = req.body
+
+  const user = await User.findOne({
+    where: {
+       telegramID
+    }
+  })
+
+  if (user) {
+    res.json(user)
+    return
+  } 
+
+  const newUser = await User.create({
+    telegramID,
+    language,
+    username,
+    firstName,
+    lastName,
+  })
+
+  res.json(newUser)
+})
 
 module.exports = router;
