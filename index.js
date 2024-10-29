@@ -51,9 +51,9 @@ app.get('/', (req, res) => {
   res.send('Succeeded API test');
 });
 
-const userRoutes = require('./routes/users')
+const businessesRoutes = require('./routes/businesses')
 
-app.use('/users', userRoutes)
+app.use('/businesses', businessesRoutes)
 
 const server = app.listen(PORT, HOST, () => {
   console.log(`Server working on http://localhost:${PORT}`);

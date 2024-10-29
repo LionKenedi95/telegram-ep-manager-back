@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const User = (sequelize, DataTypes) => {
-  const UserModel = sequelize.define('User', {
+const Business = (sequelize, DataTypes) => {
+  const BusinessModel = sequelize.define('Business', {
     id: {
       type: DataTypes.BIGINT,
       allowNull: false,
@@ -32,19 +32,17 @@ const User = (sequelize, DataTypes) => {
     },
   }, {
     timestamps: true,
-    tableName: 'users',
+    tableName: 'businesses',
   });
 
-  UserModel.associate = (models) => {
-    console.log('models', models)
-
-    UserModel.hasMany(models.TimeSlot, {
-      foreignKey: 'userId', // Внешний ключ
-      as: 'timeSlots',      // Псевдоним для ассоциации
+  BusinessModel.associate = (models) => {
+    BusinessModel.hasMany(models.Service, {
+      foreignKey: 'businessID', // Внешний ключ
+      as: 'services',      // Псевдоним для ассоциации
     });
   };
 
-  return UserModel
+  return BusinessModel
 }
 
-module.exports = User;
+module.exports = Business;

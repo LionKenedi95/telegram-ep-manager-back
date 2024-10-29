@@ -10,11 +10,11 @@ const TimeSlot = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
     },
-    userId: {
+    serviceId: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
-        model: 'users',
+        model: 'services',
         key: 'id'
       }
     },
@@ -34,15 +34,6 @@ const TimeSlot = (sequelize, DataTypes) => {
     timestamps: true,
     tableName: 'timeSlots',
   });
-
-  TimeSlotModel.associate = (models) => {
-    console.log('models', models)
-
-    TimeSlotModel.belongsTo(models.User, {
-      foreignKey: 'userId',
-      as: 'user',
-    });
-  };
 
   return TimeSlotModel
 }
