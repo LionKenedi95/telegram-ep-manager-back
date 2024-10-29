@@ -36,7 +36,8 @@ process.once('SIGINT', () => stopDB())
 process.once('SIGTERM', () => stopDB())
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.DB_PORT || 3000;
+const HOST = process.env.DB_HOST || '0.0.0.0';
 
 // Middleware для работы с JSON
 app.use(express.json());
@@ -54,7 +55,7 @@ const userRoutes = require('./routes/users')
 
 app.use('/users', userRoutes)
 
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, HOST, () => {
   console.log(`Server working on http://localhost:${PORT}`);
 });
 
