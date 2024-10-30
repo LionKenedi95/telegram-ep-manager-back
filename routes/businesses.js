@@ -27,6 +27,14 @@ router.post('/check', async (req, res) => {
     lastName,
   } = req.body
 
+  if (!telegramID || typeof telegramID !== 'integer') {
+    console.error('Try businesses/check -> No telegramID. req.body:', req.body)
+    res.json({
+      error: 'No telegramID'
+    })
+    return
+  }
+
   const business = await Business.findOne({
     where: {
        telegramID
