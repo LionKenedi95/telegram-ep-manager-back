@@ -57,4 +57,43 @@ router.post('/check', async (req, res) => {
   res.json(newBusiness);
 });
 
+router.post('/edit', async (req, res) => {
+  const id = req.body.id
+
+  if (!id || typeof id !== 'number') {
+    console.error('Try businesses/edit -> No id. req.body:', req.body)
+    res.json({
+      error: 'No id'
+    })
+    return
+  }
+
+  if (typeof req.body.edit !== 'object') {
+    console.error('Try businesses/edit -> No edit object. req.body.edit:', req.body.edit)
+    res.json({
+      error: 'No edit object'
+    })
+    return
+  }
+
+  let updatedRows = 0
+
+  try {
+    [updatedRows] = await Business.update(req.body.edit, {
+      where: { id },
+    });
+  } catch(e) {
+    console.error('Try businesses/edit -> error in query', e)
+    req.json({ error: 'Error in query' })
+    return
+  }
+  
+
+  if (updatedRows === 0) {
+    req.json({ error: 'No updated rows' })
+  } else {
+    req.json({ result: 'success' })
+  }
+});
+
 module.exports = router;

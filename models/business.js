@@ -30,6 +30,10 @@ const Business = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    companyName: {
+      type: DataTypes.STRING,
+      default: '',
+    },
   }, {
     timestamps: true,
     tableName: 'businesses',
