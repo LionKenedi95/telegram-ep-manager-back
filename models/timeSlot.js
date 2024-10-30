@@ -10,7 +10,7 @@ const TimeSlot = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
     },
-    serviceId: {
+    serviceID: {
       type: DataTypes.BIGINT,
       allowNull: false,
       references: {
