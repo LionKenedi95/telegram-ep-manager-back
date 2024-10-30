@@ -15,7 +15,7 @@ router.get('/:id', async (req, res) => {
       }
     ]
   });
-  res.json(business);//
+  res.json(business);
 });
 
 router.post('/check', async (req, res) => {
@@ -31,22 +31,22 @@ router.post('/check', async (req, res) => {
     where: {
        telegramID
     }
-  })
+  });
 
-  if (business) {//
+  if (business) {
     res.json(business)
     return
   } 
 
-  const newBusiness = await Business.create({//
+  const newBusiness = await Business.create({
     telegramID,
     language,
     username,
     firstName,
     lastName,
-  })
+  });
 
-  res.json(newBusiness)
-})
+  res.json(newBusiness);
+});
 
 module.exports = router;
