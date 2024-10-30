@@ -48,16 +48,16 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
 
 // Маршрут для проверки API
 app.get('/', (req, res) => {
-  res.send('Succeeded API test');
+  res.send('Succeeded API test'); 
 });
 
 const businessesRoutes = require('./routes/businesses')
 const servisesRoutes =  require('./routes/services')
 const timeSlotsRoutes = require('./routes/timeSlots')
 
-app.use('/businesses', businessesRoutes)
-app.use('/services', servisesRoutes)
-app.use('/time-slots', timeSlotsRoutes)
+app.use('/api/businesses', businessesRoutes)
+app.use('/api/services', servisesRoutes)
+app.use('/api/time-slots', timeSlotsRoutes)
 
 const server = app.listen(PORT, HOST, () => {
   console.log(`Server working on http://localhost:${PORT}`);
