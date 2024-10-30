@@ -38,7 +38,13 @@ router.post('/check', async (req, res) => {
   const business = await Business.findOne({
     where: {
        telegramID
-    }
+    },
+    include: [
+      {
+        model: Service,
+        as: 'services'
+      }
+    ]
   });
 
   if (business) {
