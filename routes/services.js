@@ -3,7 +3,7 @@ const router = express.Router();
 const { Business, Service } = require('../models');
 const { where } = require('sequelize');
 
-router.post('/services-create', async (req, res) => {
+router.post('/create', async (req, res) => {
     //Создание нового сервиса
 
     const {

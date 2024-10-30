@@ -3,7 +3,7 @@ const router = express.Router();
 const { TimeSlot } = require('../models');
 const { where } = require('sequelize');
 
-router.post('/timeSlots-create', async (req, res) => {
+router.post('/create', async (req, res) => {
     //Создание нового таймслота
 
     const {
