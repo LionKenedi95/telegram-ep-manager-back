@@ -84,15 +84,15 @@ router.post('/edit', async (req, res) => {
     });
   } catch(e) {
     console.error('Try businesses/edit -> error in query', e)
-    req.json({ error: 'Error in query' })
+    res.json({ error: 'Error in query' })
     return
   }
   
 
   if (updatedRows === 0) {
-    req.json({ error: 'No updated rows' })
+    res.json({ error: 'No updated rows' })
   } else {
-    req.json({ result: 'success' })
+    res.json({ result: 'success' })
   }
 });
 
