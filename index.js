@@ -71,3 +71,7 @@ process.once('SIGTERM', () => {
   console.log('Server stoping...')
   server.close(() => console.log('Server down'))
 })
+
+const bot = require('./bot')
+
+console.log('bot launched', bot.botInfo.id)
