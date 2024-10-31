@@ -21,4 +21,42 @@ router.post('/create', async (req, res) => {
     res.json(newService);
 });
 
+const getServicesByBusinessID = async (businessID, res) => {
+    try {
+        const services = await Service.findAll({ where: { businessID }})
+
+        res.json(services)
+    } catch (e) {
+        console.error('Cant load info about services by businessID', e)
+        res.json({ error: 'Cant load info about services by businessID' })
+    }
+}
+
+const getServicesByIDs = async (IDs, res) => {
+    try {
+        const services = await Service.findAll({ where: { id: IDs }})
+
+        res.json(services)
+    } catch (e) {
+        console.error('Cant load info about services by IDs', e)
+        res.json({ error: 'Cant load info about services by IDs' })
+    }
+}
+
+router.post('/get-service', async (req, res) => {
+    const {
+        businessID,
+        serviceIDs,
+    } = req.body;
+
+    if (businessID && !serviceIDs) {
+        getServicesByBusinessID(businessID, res)
+        return
+    }
+
+    if (Array.isArray(serviceIDs) && serviceIDs.length) {
+        getServicesByIDs(serviceIDs, res)
+    }
+})
+
 module.exports = router;
