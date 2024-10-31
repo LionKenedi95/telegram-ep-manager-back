@@ -54,10 +54,12 @@ app.get('/', (req, res) => {
 const businessesRoutes = require('./routes/businesses')
 const servisesRoutes =  require('./routes/services')
 const timeSlotsRoutes = require('./routes/timeSlots')
+const botRoutes = require('./routes/bot')
 
 app.use('/api/businesses', businessesRoutes)
 app.use('/api/services', servisesRoutes)
 app.use('/api/time-slots', timeSlotsRoutes)
+app.use('/api/bot', botRoutes)
 
 const server = app.listen(PORT, HOST, () => {
   console.log(`Server working on http://localhost:${PORT}`);
