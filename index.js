@@ -74,4 +74,4 @@ process.once('SIGTERM', () => {
 
 const bot = require('./bot')
 
-console.log('bot launched', bot.botInfo.id)
+console.log('bot launched with token', bot.telegram.token)
