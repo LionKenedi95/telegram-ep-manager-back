@@ -8,6 +8,8 @@ router.post('/first-service-link', async (req, res) => {
     link,
   } = req.body
 
+  console.log('first-service-link', chatId, link)
+
   try {
     bot.telegram.sendMessage(chatId, `Ура 🎉 Вы создали свою первую услуг и клиентам можно отправить на нее ссылку💙
       Ссылка была автоматически скопирована. Вот она:
