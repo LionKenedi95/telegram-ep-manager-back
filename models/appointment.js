@@ -26,6 +26,10 @@ const Appointment = (sequelize, DataTypes) => {
               key: 'id'
             }
         },
+        comment: {
+            type: DataTypes.STRING,
+            default: ''
+        }
     }, {
         timestamps: true,
         tableName: 'appointments'
