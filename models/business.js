@@ -10,29 +10,9 @@ const Business = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
     },
-    telegramID: {
-      type: DataTypes.BIGINT,
-      allowNull: false,
-    },
-    language: {
+    name: {
       type: DataTypes.STRING,
       allowNull: true,
-    },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    firstName: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    lastName: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    companyName: {
-      type: DataTypes.STRING,
-      default: '',
     },
   }, {
     timestamps: true,
