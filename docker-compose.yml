@@ -1,0 +1,43 @@
+services:
+    app:
+        image: k00kla/telegram-ep-manager-back:latest
+        build: .
+        container_name: Channels_Manager
+        networks:
+            - tlgbot-network
+        ports:
+            - '3001:3001'
+        env_file:
+            - config/.env.prod
+        volumes:
+            - /app/node_modules
+        depends_on:
+            - db
+        # command: tail -f /dev/null
+        restart: no
+
+    db:
+        image: postgres:latest
+        container_name: my_postgres
+        networks:
+            - tlgbot-network
+        env_file:
+            - config/.env.prod
+        ports:
+            - '5432:5432'
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        restart: always
+        # healthcheck:
+        #     test: ['CMD-SHELL', 'pg_isready']
+        #     interval: 10s
+        #     timeout: 5s
+        #     retries: 5
+
+volumes:
+    pgdata:
+
+networks:
+    tlgbot-network:
+        name: tlgbot-network
+        driver: bridge

@@ -1,3 +1,8 @@
 /node_modules
 .env
 docs/*.bkp
+test*
+.env*
+hash
+app
+.vscode

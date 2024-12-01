@@ -1,0 +1,92 @@
+
+BaseUrl: {host}/api
+PUT /user
+Request:
+{
+    "query_id": string,
+    "user": {
+        "id": number,
+        "first_name": string,
+        "last_name": string,
+        "username": string,
+        "language_code": string,
+        "is_premium": boolean,
+        "allows_write_to_pm": boolean,
+        "photo_url": string
+    },
+    "auth_date": number,
+    "signature": string,
+    "hash": string
+}
+
+Response:
+{
+    "id": number,
+    "first_name": string,
+    "last_name": string,
+    "username": string,
+    "businesses": Array<{
+        "id": number,
+        "name": string,
+        "ownerId": number
+        "products": Array<{
+            "id": number,
+            "name": string,
+            "businessId": number,
+            "link": string,
+            "type": "channel" | "media",
+        }>
+    }>,
+}
+
+POST Business
+Request:
+{
+    "name": "Test business",
+    "ownerId": {{userId}}
+}
+
+Response:
+{
+    "id": number,
+    "name": string,
+    "ownerId": number
+}
+
+GET Business
+Request:
+{
+    "id": number
+}
+
+Response:
+{
+    "id": number,
+    "name": string,
+    "ownerId": {{id}},
+    "products": Array<{
+            "id": number,
+            "name": string,
+            "businessId": number,
+            "link": string,
+            "type": "channel" | "media",
+        }>
+}
+
+POST Product
+Request:
+{
+    "name": "Test product",
+    "businessId": {{businessId}},
+    "link": "https://www.google.com",
+    "type": "channel"
+}
+
+Response:
+{
+    "id": number,
+    "name": string,
+    "businessId": number,
+    "link": string,
+    "type": "channel" | "media",
+}
