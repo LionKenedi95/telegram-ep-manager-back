@@ -1,22 +1,12 @@
 import { Router } from 'express'
-import { getUserController, postUserController, putUserController } from '../controllers/Users/user.controller'
-import { getBusinessController, postBusinessController } from '../controllers/Businesses/business.controller'
-import { getProductController, postProductController } from '../controllers/Products/product.controller'
+import { userRouter } from './User/user.router'
+import { businessRouter } from './Business/business.router'
+import { productRouter } from './Product/product.router'
 
 const router = Router()
 
-/* Users */
-router.get('/user', getUserController)
-router.post('/user', postUserController)
-router.put('/user', putUserController)
-
-/* Businesses */
-router.get('/business', getBusinessController)
-router.post('/business', postBusinessController)
-
-/* Products */
-router.get('/product', getProductController)
-router.post('/product', postProductController)
-
+router.use(userRouter)
+router.use(businessRouter)
+router.use(productRouter)
 
 export { router }

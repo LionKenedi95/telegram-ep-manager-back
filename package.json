@@ -13,12 +13,16 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@types/express-validator": "^2.20.33",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-validator": "^7.2.0",
+    "joi": "^17.13.3",
     "module-alias": "^2.2.3",
     "pg": "^8.13.1",
-    "sequelize": "^6.37.5"
+    "sequelize": "^6.37.5",
+    "telegraf": "^4.16.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",

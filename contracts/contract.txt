@@ -76,8 +76,8 @@ Response:
 POST Product
 Request:
 {
-    "name": "Test product",
     "businessId": {{businessId}},
+    "name": "Test product",
     "link": "https://www.google.com",
     "type": "channel"
 }

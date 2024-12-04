@@ -1,13 +1,9 @@
 import { UsersModel } from '../models/users.model'
 import { db } from '../database'
+import { ValidationError } from 'sequelize'
 
-async function newUser(
-	id: number,
-	first_name: string,
-	last_name: string,
-	username: string,
-) {
-	console.log( "New user:", id, first_name, last_name, username )
+async function newUser(id: number, first_name: string, last_name: string, username: string) {
+	console.log('New user:', id, first_name, last_name, username)
 	const t = await db.transaction()
 	try {
 		const user = await UsersModel.create(
@@ -15,16 +11,20 @@ async function newUser(
 				id,
 				first_name,
 				last_name,
-				username,
+				username
 			},
-			{ transaction: t },
+			{ transaction: t }
 		)
 
 		await t.commit()
 
 		return user
 	} catch (error) {
-		console.error(error)
+		if (error instanceof ValidationError) {
+			console.error(error.errors.map(e => e.message).join('\n'))
+		} else {
+			console.error(error)
+		}
 		await t.rollback()
 	}
 }

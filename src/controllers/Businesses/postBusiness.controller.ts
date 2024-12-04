@@ -1,14 +1,14 @@
-import { Response, Request } from 'express'
+import { Response, Request, RequestParamHandler } from 'express'
 import { newBusiness } from '../../db/functions/newBusiness.db'
-import { ParsedUrlQueryInput } from 'querystring'
 import { prettyfyAnswer } from '../../utils/prettyfyAnswer'
+import { CreateBusinessInput } from '../../interfaces/Businesses.interface'
 
-async function postBusinessController(req: Request, res: Response): Promise<void> {
-	const business = req.body
+async function postBusinessController(req: Request<any, CreateBusinessInput>, res: Response): Promise<void> {
+	const business = req.body.business
 	try {
-		const { name, ownerId } = business as ParsedUrlQueryInput
+		const { name, ownerId } = business
 
-		let businessData = await newBusiness( name as string, Number(ownerId) )
+		let businessData = await newBusiness(name as string, Number(ownerId))
 
 		res.status(200).send(prettyfyAnswer(businessData))
 	} catch (error) {
