@@ -22,11 +22,13 @@ ${JSON.stringify(user)}`)
 		res.status(200).send(prettyfyAnswer(userData))
 		console.log(`OK`)
 		console.groupEnd()
+		return prettyfyAnswer(userData)
 	} catch (error) {
 		console.error(error)
 		res.status(500).send('Internal Server Error')
 		console.log(`Internal Server Error`)
 		console.groupEnd()
+		return error
 	}
 }
 

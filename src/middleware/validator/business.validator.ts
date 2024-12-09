@@ -7,7 +7,7 @@ const createBusinessSchema = {
 		query_id: joi.string().required(),
 		business: joi.object({
 			name: joi.string().required(),
-			owner_id: joi.string().required()
+			ownerId: joi.number().required()
 		}),
 		auth_date: joi.number(),
 		signature: joi.string(),

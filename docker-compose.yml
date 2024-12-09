@@ -14,7 +14,7 @@ services:
         depends_on:
             - db
         # command: tail -f /dev/null
-        restart: no
+        restart: always
 
     db:
         image: postgres:latest

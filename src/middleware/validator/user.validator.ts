@@ -1,5 +1,5 @@
 import joi from 'joi'
-import { CreateUserInput } from '../../interfaces/Users.interface'
+import { CreateUserInput, GetUserInput } from '../../interfaces/Users.interface'
 import { validatorMiddleware } from '../validatorMiddleware'
 
 const createUserSchema = {
@@ -21,5 +21,12 @@ const createUserSchema = {
 	})
 }
 
+const getUserSchema = {
+	params: joi.object<GetUserInput>({
+		userId: joi.number().required()
+	})
+}
+
 const createUserValidation = validatorMiddleware<keyof typeof createUserSchema, CreateUserInput>(createUserSchema)
-export { createUserValidation }
+const getUserValidation = validatorMiddleware<keyof typeof getUserSchema, GetUserInput>(getUserSchema)
+export { createUserValidation, getUserValidation }

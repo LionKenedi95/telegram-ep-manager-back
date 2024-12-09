@@ -1,22 +1,22 @@
 import { ParentInput } from './ParentInput.interface'
-import { ProductInterface } from './Products.interface'
+import { ProductInterfaceDB } from './Products.interface'
 
-interface BusinessInterface {
+interface BusinessInterfaceDB {
 	business_id: string
 	name: string
-	owner_id: string
-	products?: ProductInterface[]
+	owner_id: number
+	products?: ProductInterfaceDB[]
 }
 
 interface CreateBusinessInput extends ParentInput {
 	business: {
 		name: string
-		owner_id: string
+		ownerId: number
 	}
 }
 
 interface GetBusinessInput extends ParentInput {
-	business_id: string
+	businessId: string
 }
 
-export { BusinessInterface, CreateBusinessInput, GetBusinessInput }
+export { BusinessInterfaceDB, CreateBusinessInput, GetBusinessInput }

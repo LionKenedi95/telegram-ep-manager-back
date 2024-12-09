@@ -8,13 +8,11 @@ async function getBusiness(id: number) {
 			{
 				model: ProductsModel,
 				as: 'products',
-				attributes: ['id', 'name', 'link', 'type', 'businessId'],
-			},
-		],
+				attributes: ['id', 'name', 'link', 'type', 'business_id']
+			}
+		]
 	})
 	return businessInfo
 }
 
 export { getBusiness }
-
-

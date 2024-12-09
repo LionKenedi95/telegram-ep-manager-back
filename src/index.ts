@@ -4,7 +4,7 @@ import cors from 'cors'
 import { router } from './routes'
 import { db } from './db/database'
 import { retrySequelizeConnect } from './db/retrySequalizeConnect'
-import { initializeDatabase } from './db/models/initializeDatabase'
+import { initializeDatabase } from './db/initializeDatabase'
 
 function errorHandler(err: Error, req: express.Request, res: express.Response, next: express.NextFunction) {
 	console.log(next)
@@ -34,7 +34,14 @@ app.use(
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use('/api/', router)
+app.use(
+	'/api/',
+	(res, req, next) => {
+		console.log('API')
+		next()
+	},
+	router
+)
 
 app.use(errorHandler)
 ;(async () => {
@@ -51,3 +58,5 @@ app.use(errorHandler)
 		console.error('Failed to initialize the application:', err)
 	}
 })()
+
+export { app }

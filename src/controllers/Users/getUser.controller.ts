@@ -1,16 +1,15 @@
-import { Response, Request } from 'express'
+import { Response, Request, RequestParamHandler } from 'express'
 import { getUser } from '../../db/functions/getUser.db'
-import { ParsedUrlQueryInput } from 'querystring'
 import { prettyfyAnswer } from '../../utils/prettyfyAnswer'
 
 async function getUserController(req: Request, res: Response): Promise<void> {
-	const user = req.body.user
 	try {
-		const { id } =
-			user as ParsedUrlQueryInput
-
-		const userData = await getUser(+id)
-
+		const { userId } = req.params
+		const userData = await getUser(+userId)
+		if (!userData) {
+			res.status(404).send('User not found')
+			return
+		}
 		res.status(200).send(prettyfyAnswer(userData))
 	} catch (error) {
 		console.error(error)

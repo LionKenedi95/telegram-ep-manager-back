@@ -2,13 +2,13 @@ import { ValidationError } from 'sequelize'
 import { ProductsModel } from '../models/products.model'
 import { db } from '../database'
 
-async function newProduct(name, businessId, link, type) {
+async function newProduct(name, business_id, link, type) {
 	const t = await db.transaction()
 	try {
 		const product = await ProductsModel.create(
 			{
 				name,
-				businessId,
+				business_id,
 				link,
 				type
 			},

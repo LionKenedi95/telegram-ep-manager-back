@@ -1,9 +1,9 @@
 import { Response, Request } from 'express'
 import { newUser } from '../../db/functions/newUser.db'
-import { ParsedUrlQueryInput } from 'querystring'
+import { CreateUserInput } from '../../interfaces/Users.interface'
 import { prettyfyAnswer } from '../../utils/prettyfyAnswer'
 
-async function postUserController(req: Request, res: Response): Promise<void> {
+async function postUserController(req: Request<any, CreateUserInput>, res: Response): Promise<void> {
 	const user = req.body.user
 	try {
 		const { id, first_name, last_name, username } = user

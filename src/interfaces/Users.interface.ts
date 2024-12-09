@@ -1,12 +1,12 @@
 import { ParentInput } from './ParentInput.interface'
-import { BusinessInterface } from './Businesses.interface'
+import { BusinessInterfaceDB } from './Businesses.interface'
 
-interface UserInterface {
+interface UserInterfaceDB {
 	user_id: string
 	first_name: string
 	last_name: string
 	username: string
-	businesses?: BusinessInterface[]
+	businesses?: BusinessInterfaceDB[]
 }
 
 interface CreateUserInput extends ParentInput {
@@ -23,7 +23,7 @@ interface CreateUserInput extends ParentInput {
 }
 
 interface GetUserInput extends ParentInput {
-	user_id: string
+	userId: string
 }
 
-export { UserInterface, CreateUserInput, GetUserInput }
+export { UserInterfaceDB, CreateUserInput, GetUserInput }

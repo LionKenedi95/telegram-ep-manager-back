@@ -3,15 +3,11 @@ import { getProduct } from '../../db/functions/getProduct.db'
 import { ParsedUrlQueryInput } from 'querystring'
 import { prettyfyAnswer } from '../../utils/prettyfyAnswer'
 
-async function getProductController(
-	req: Request,
-	res: Response,
-): Promise<void> {
-	const product = req.body
+async function getProductController(req: Request, res: Response): Promise<void> {
 	try {
-		const { id } = product as ParsedUrlQueryInput
+		const { product_id } = req.params
 
-		const productData = await getProduct(Number(id))
+		const productData = await getProduct(Number(product_id))
 
 		res.status(200).send(prettyfyAnswer(productData))
 	} catch (error) {

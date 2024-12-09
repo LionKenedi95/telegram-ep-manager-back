@@ -3,12 +3,37 @@
 	"configurations": [
 		{
 			"type": "node",
+			"name": "vscode-jest-tests.v2",
+			"request": "launch",
+			"program": "${workspaceFolder}/node_modules/.bin/jest",
+			"args": [
+				"--runInBand",
+				"--watchAll=false",
+				"--testNamePattern",
+				"${jest.testNamePattern}",
+				"--runTestsByPath",
+				"${jest.testFile}"
+			],
+			"cwd": "${workspaceFolder}",
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen",
+			"disableOptimisticBPs": true,
+			"windows": {
+				"program": "${workspaceFolder}/node_modules/jest/bin/jest"
+			}
+		},
+		{
+			"type": "node",
 			"request": "launch",
 			"name": "Launch Program",
-			"skipFiles": ["<node_internals>/**"],
+			"skipFiles": [
+				"<node_internals>/**"
+			],
 			"program": "${file}",
 			"preLaunchTask": "tsc: build - tsconfig.json",
-			"outFiles": ["${workspaceFolder}/dist/**/*.js"]
+			"outFiles": [
+				"${workspaceFolder}/dist/**/*.js"
+			]
 		},
 		{
 			"type": "node-terminal",
@@ -16,7 +41,9 @@
 			"request": "launch",
 			"command": "ts-node -- ${fileBasenameNoExtension}",
 			"cwd": "${fileDirname}",
-			"skipFiles": ["<node_internals>/**"]
+			"skipFiles": [
+				"<node_internals>/**"
+			]
 		},
 		{
 			"type": "node-terminal",
@@ -24,7 +51,9 @@
 			"request": "launch",
 			"command": "ts-node src/index.ts",
 			"envFile": "${workspaceFolder}/config/.env.dev",
-			"skipFiles": ["<node_internals>/**"]
+			"skipFiles": [
+				"<node_internals>/**"
+			]
 		}
 	]
 }

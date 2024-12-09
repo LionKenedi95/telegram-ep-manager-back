@@ -4,7 +4,7 @@ import { createBusinessValidation } from '../../middleware/validator/business.va
 
 const businessRouter = Router()
 
-businessRouter.get('/business', getBusinessController)
+businessRouter.get('/business/:businessId', getBusinessController)
 businessRouter.post('/business', createBusinessValidation, postBusinessController)
 
 export { businessRouter }

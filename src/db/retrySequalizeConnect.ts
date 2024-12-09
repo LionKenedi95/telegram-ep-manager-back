@@ -9,23 +9,19 @@ const retrySequelizeConnect = async (sequelize, retries = 5, delay = 5000) => {
       `)
 	while (retries > 0) {
 		console.log(
-`Trying to connect to the database. 
-With config: ${JSON.stringify(sequelize.config, null, 1)}`,
+			`Trying to connect to the database. 
+With config: ${JSON.stringify(sequelize.config, null, 1)}`
 		)
 		try {
 			await sequelize.authenticate()
-			console.log(
-				'Database connection has been established successfully.',
-			)
+			console.log('Database connection has been established successfully.')
 			await sequelize.sync()
 			return
 		} catch (err) {
-			console.error(
-				`Unable to connect to the database. Retries left: ${retries}`,
-			)
+			console.error(`Unable to connect to the database. Retries left: ${retries}`)
 			console.error(err.message)
 			retries -= 1
-			await new Promise((res) => setTimeout(res, delay))
+			await new Promise(res => setTimeout(res, delay))
 		}
 	}
 	throw new Error('Unable to connect to the database after multiple retries.')

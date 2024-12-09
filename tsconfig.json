@@ -5,15 +5,21 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "rootDir": "./src",
-    "outDir": "./app",
+    "outDir": "app",
     "baseUrl": "./",
     "strict": false,
     "skipLibCheck": true,
     "sourceMap": true,
     "noEmitOnError": true, // Отключить вывод при ошибках
     "noErrorTruncation": true, // Полный вывод ошибок
-    "tsBuildInfoFile": "./app/tsconfig.tsbuildinfo" // Указание файла для хранения информации о сборке
+    "tsBuildInfoFile": "app/tsconfig.tsbuildinfo" // Указание файла для хранения информации о сборке
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "*test*", "*.txt"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "*test*",
+    "*.txt"
+  ]
 }

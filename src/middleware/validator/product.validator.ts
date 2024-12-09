@@ -7,7 +7,7 @@ const createProductSchema = {
 		query_id: joi.string().required(),
 		product: joi.object({
 			name: joi.string().required(),
-			business_id: joi.number().required(),
+			businessId: joi.number().required(),
 			link: joi.string().required(),
 			type: joi.string().valid('channel', 'media').required()
 		}),

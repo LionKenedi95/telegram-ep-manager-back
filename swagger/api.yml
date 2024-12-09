@@ -1,0 +1,479 @@
+openapi: 3.0.0
+info:
+  title: Telegram Manager Bot API
+  version: 1.0.0
+  description: API для управления пользователями, бизнесами, продуктами и реквизитами
+
+paths:
+  /api/user:
+    put:
+      summary: Обновить пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query_id:
+                  type: string
+                  example: "AAGt0aANAAAAAK3RoA2budqB"
+                user:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 333
+                    first_name:
+                      type: string
+                      example: "Sergey"
+                    last_name:
+                      type: string
+                      example: "Murashow"
+                    username:
+                      type: string
+                      example: "tututu"
+                    language_code:
+                      type: string
+                      example: "en"
+                    is_premium:
+                      type: boolean
+                      example: true
+                    allows_write_to_pm:
+                      type: boolean
+                      example: true
+                    photo_url:
+                      type: string
+                      example: "https://example.com/johndoe.jpg"
+                auth_date:
+                  type: integer
+                  example: 1732442071
+                signature:
+                  type: string
+                  example: "MXZuPJRRUnxDvTSL5XjBTOMox_nct8rhUayZCwkAwqfNxhAvY94t0Qdui3oNkDqrKBb0DfY7scg-RVXjlSjoDg"
+                hash:
+                  type: string
+                  example: "4bc66f8f58e1cb650f06e83169edae1dc7d764f6eff8258e2bf4d72a434d0ca6"
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 333
+                  first_name:
+                    type: string
+                    example: "Sergey"
+                  last_name:
+                    type: string
+                    example: "Murashow"
+                  username:
+                    type: string
+                    example: "tututu"
+                  businesses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "Test business"
+                        products:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 1
+                              name:
+                                type: string
+                                example: "Test product"
+                              link:
+                                type: string
+                                example: "https://ya.ru"
+                              type:
+                                type: string
+                                example: "channel"
+
+  /api/user/{id}:
+    get:
+      summary: Получить пользователя по ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID пользователя
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 333
+                  first_name:
+                    type: string
+                    example: "Sergey"
+                  last_name:
+                    type: string
+                    example: "Murashow"
+                  username:
+                    type: string
+                    example: "tututu"
+                  businesses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "Test business"
+                        products:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: integer
+                                example: 1
+                              name:
+                                type: string
+                                example: "Test product"
+                              link:
+                                type: string
+                                example: "https://ya.ru"
+                              type:
+                                type: string
+                                example: "channel"
+
+  /api/business:
+    post:
+      summary: Создать бизнес
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query_id:
+                  type: string
+                  example: "AAGt0aANAAAAAK3RoA2budqB"
+                business:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: "Test business"
+                    ownerId:
+                      type: integer
+                      example: 333
+                auth_date:
+                  type: integer
+                  example: 1732442071
+                signature:
+                  type: string
+                  example: "MXZuPJRRUnxDvTSL5XjBTOMox_nct8rhUayZCwkAwqfNxhAvY94t0Qdui3oNkDqrKBb0DfY7scg-RVXjlSjoDg"
+                hash:
+                  type: string
+                  example: "4bc66f8f58e1cb650f06e83169edae1dc7d764f6eff8258e2bf4d72a434d0ca6"
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "Test business"
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "Test product"
+                        link:
+                          type: string
+                          example: "https://ya.ru"
+                        type:
+                          type: string
+                          example: "channel"
+                        business_id:
+                          type: integer
+                          example: 1
+
+  /api/business/{id}:
+    get:
+      summary: Получить бизнес по ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID бизнеса
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  name:
+                    type: string
+                    example: "Test business"
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "Test product"
+                        link:
+                          type: string
+                          example: "https://ya.ru"
+                        type:
+                          type: string
+                          example: "channel"
+                        business_id:
+                          type: integer
+                          example: 1
+
+  /api/product:
+    post:
+      summary: Создать продукт
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query_id:
+                  type: string
+                  example: "AAGt0aANAAAAAK3RoA2budqB"
+                product:
+                  type: object
+                  properties:
+                    businessId:
+                      type: integer
+                      example: 1
+                    link:
+                      type: string
+                      example: "https://ya.ru"
+                    name:
+                      type: string
+                      example: "Test product"
+                    type:
+                      type: string
+                      example: "channel"
+                auth_date:
+                  type: integer
+                  example: 1732442071
+                signature:
+                  type: string
+                  example: "MXZuPJRRUnxDvTSL5XjBTOMox_nct8rhUayZCwkAwqfNxhAvY94t0Qdui3oNkDqrKBb0DfY7scg-RVXjlSjoDg"
+                hash:
+                  type: string
+                  example: "4bc66f8f58e1cb650f06e83169edae1dc7d764f6eff8258e2bf4d72a434d0ca6"
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 2
+                  name:
+                    type: string
+                    example: "Test product"
+                  business_id:
+                    type: integer
+                    example: 1
+                  link:
+                    type: string
+                    example: "https://ya.ru"
+                  type:
+                    type: string
+                    example: "channel"
+                  updatedAt:
+                    type: object
+                    example: {}
+                  createdAt:
+                    type: object
+                    example: {}
+
+  /api/requisites:
+    post:
+      summary: Создать реквизиты
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query_id:
+                  type: string
+                  example: "AAGt0aANAAAAAK3RoA2budqB"
+                requisites:
+                  type: object
+                  properties:
+                    businessId:
+                      type: integer
+                      example: 1
+                    type:
+                      type: string
+                      enum: ['самозанятый', 'ип']
+                      example: "ип"
+                    inn:
+                      type: string
+                      example: "123456789010"
+                    kpp:
+                      type: string
+                      example: "123456789"
+                    ogrn:
+                      type: string
+                      example: "1234567890123"
+                    bik:
+                      type: string
+                      example: "123456789"
+                    paymentAccount:
+                      type: string
+                      example: "12345678901234567890"
+                    bank:
+                      type: string
+                      example: "Some Bank Name"
+                auth_date:
+                  type: integer
+                  example: 1732442071
+                signature:
+                  type: string
+                  example: "MXZuPJRRUnxDvTSL5XjBTOMox_nct8rhUayZCwkAwqfNxhAvY94t0Qdui3oNkDqrKBb0DfY7scg-RVXjlSjoDg"
+                hash:
+                  type: string
+                  example: "4bc66f8f58e1cb650f06e83169edae1dc7d764f6eff8258e2bf4d72a434d0ca6"
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 3
+                  inn:
+                    type: string
+                    example: "123456789010"
+                  kpp:
+                    type: string
+                    example: "123456789"
+                  ogrn:
+                    type: string
+                    example: "1234567890123"
+                  bik:
+                    type: string
+                    example: "123456789"
+                  paymentAccount:
+                    type: string
+                    example: "12345678901234567890"
+                  bank:
+                    type: string
+                    example: "Some Bank Name"
+                  business_id:
+                    type: integer
+                    example: 1
+                  type:
+                    type: string
+                    example: "ип"
+                  updatedAt:
+                    type: object
+                    example: {}
+                  createdAt:
+                    type: object
+                    example: {}
+
+  /api/requisites/{id}:
+    get:
+      summary: Получить реквизиты по ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID реквизитов
+      responses:
+        '200':
+          description: Успешный ответ
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 3
+                  inn:
+                    type: string
+                    example: "123456789010"
+                  kpp:
+                    type: string
+                    example: "123456789"
+                  ogrn:
+                    type: string
+                    example: "1234567890123"
+                  bik:
+                    type: string
+                    example: "123456789"
+                  paymentAccount:
+                    type: string
+                    example: "12345678901234567890"
+                  bank:
+                    type: string
+                    example: "Some Bank Name"
+                  business_id:
+                    type: integer
+                    example: 1
+                  type:
+                    type: string
+                    example: "ип"
